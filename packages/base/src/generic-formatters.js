@@ -10,7 +10,7 @@ import './typedefs';
  *
  * @type { FormatCallback }
  */
-function formatSkip (elem, walk, builder, formatOptions) {
+function formatSkip(elem, walk, builder, formatOptions) {
   /* do nothing */
 }
 
@@ -19,7 +19,7 @@ function formatSkip (elem, walk, builder, formatOptions) {
  *
  * @type { FormatCallback }
  */
-function formatInlineString (elem, walk, builder, formatOptions) {
+function formatInlineString(elem, walk, builder, formatOptions) {
   builder.addLiteral(formatOptions.string || '');
 }
 
@@ -28,7 +28,7 @@ function formatInlineString (elem, walk, builder, formatOptions) {
  *
  * @type { FormatCallback }
  */
-function formatBlockString (elem, walk, builder, formatOptions) {
+function formatBlockString(elem, walk, builder, formatOptions) {
   builder.openBlock({ leadingLineBreaks: formatOptions.leadingLineBreaks || 2 });
   builder.addLiteral(formatOptions.string || '');
   builder.closeBlock({ trailingLineBreaks: formatOptions.trailingLineBreaks || 2 });
@@ -39,7 +39,7 @@ function formatBlockString (elem, walk, builder, formatOptions) {
  *
  * @type { FormatCallback }
  */
-function formatInline (elem, walk, builder, formatOptions) {
+function formatInline(elem, walk, builder, formatOptions) {
   walk(elem.children, builder);
 }
 
@@ -48,13 +48,13 @@ function formatInline (elem, walk, builder, formatOptions) {
  *
  * @type { FormatCallback }
  */
-function formatBlock (elem, walk, builder, formatOptions) {
+function formatBlock(elem, walk, builder, formatOptions) {
   builder.openBlock({ leadingLineBreaks: formatOptions.leadingLineBreaks || 2 });
   walk(elem.children, builder);
   builder.closeBlock({ trailingLineBreaks: formatOptions.trailingLineBreaks || 2 });
 }
 
-function renderOpenTag (elem) {
+function renderOpenTag(elem) {
   const attrs = (elem.attribs && elem.attribs.length)
     ? ' ' + Object.entries(elem.attribs)
       .map(([k, v]) => ((v === '') ? k : `${k}=${v.replace(/"/g, '&quot;')}`))
@@ -63,7 +63,7 @@ function renderOpenTag (elem) {
   return `<${elem.name}${attrs}>`;
 }
 
-function renderCloseTag (elem) {
+function renderCloseTag(elem) {
   return `</${elem.name}>`;
 }
 
@@ -72,7 +72,7 @@ function renderCloseTag (elem) {
  *
  * @type { FormatCallback }
  */
-function formatInlineTag (elem, walk, builder, formatOptions) {
+function formatInlineTag(elem, walk, builder, formatOptions) {
   builder.startNoWrap();
   builder.addLiteral(renderOpenTag(elem));
   builder.stopNoWrap();
@@ -87,7 +87,7 @@ function formatInlineTag (elem, walk, builder, formatOptions) {
  *
  * @type { FormatCallback }
  */
-function formatBlockTag (elem, walk, builder, formatOptions) {
+function formatBlockTag(elem, walk, builder, formatOptions) {
   builder.openBlock({ leadingLineBreaks: formatOptions.leadingLineBreaks || 2 });
   builder.startNoWrap();
   builder.addLiteral(renderOpenTag(elem));
@@ -104,7 +104,7 @@ function formatBlockTag (elem, walk, builder, formatOptions) {
  *
  * @type { FormatCallback }
  */
-function formatInlineHtml (elem, walk, builder, formatOptions) {
+function formatInlineHtml(elem, walk, builder, formatOptions) {
   builder.startNoWrap();
   builder.addLiteral(
     render(elem, { decodeEntities: builder.options.decodeEntities })
@@ -117,7 +117,7 @@ function formatInlineHtml (elem, walk, builder, formatOptions) {
  *
  * @type { FormatCallback }
  */
-function formatBlockHtml (elem, walk, builder, formatOptions) {
+function formatBlockHtml(elem, walk, builder, formatOptions) {
   builder.openBlock({ leadingLineBreaks: formatOptions.leadingLineBreaks || 2 });
   builder.startNoWrap();
   builder.addLiteral(
@@ -132,7 +132,7 @@ function formatBlockHtml (elem, walk, builder, formatOptions) {
  *
  * @type { FormatCallback }
  */
-function formatInlineSurround (elem, walk, builder, formatOptions) {
+function formatInlineSurround(elem, walk, builder, formatOptions) {
   builder.addLiteral(formatOptions.prefix || '');
   walk(elem.children, builder);
   builder.addLiteral(formatOptions.suffix || '');

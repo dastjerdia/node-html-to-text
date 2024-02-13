@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 
 import { compile as compile_ } from '@html-to-text/base';
 import * as genericFormatters from '@html-to-text/base/src/generic-formatters';
@@ -20,27 +21,13 @@ import '@html-to-text/base/src/typedefs';
  */
 const DEFAULT_OPTIONS = {
   baseElements: {
-    selectors: [ 'body' ],
+    selectors: ['body'],
     orderBy: 'selectors', // 'selectors' | 'occurrence'
     returnDomByDefault: true
   },
   decodeEntities: false,
   encodeCharacters: {
-    '!': '&excl;',
-    '#': '&num;',
-    '(': '&lpar;',
-    ')': '&rpar;',
-    '*': '&ast;',
-    '+': '&plus;',
-    '-': '&#45;', // hyphen-minus
-    '.': '&period;',
-    '[': '&lbrack;',
-    '\\': '&bsol;',
-    ']': '&rbrack;',
-    '_': '&lowbar;',
-    '`': '&grave;',
-    '{': '&lbrace;',
-    '}': '&rbrace;',
+
   },
   formatters: {},
   limits: {
@@ -48,51 +35,51 @@ const DEFAULT_OPTIONS = {
     maxBaseElements: undefined,
     maxChildNodes: undefined,
     maxDepth: undefined,
-    maxInputLength: (1 << 24) // 16_777_216
   },
   selectors: [
-    { selector: '*', format: 'inline' },
-    { selector: 'a', format: 'anchor', options: { baseUrl: null, noAnchorUrl: true } },
-    { selector: 'article', format: 'block' },
-    { selector: 'aside', format: 'block' },
-    { selector: 'b', format: 'inlineSurround', options: { prefix: '**', suffix: '**' } },
-    { selector: 'blockquote', format: 'blockquote', options: { trimEmptyLines: true } },
-    { selector: 'br', format: 'inlineString', options: { string: '<br>' } },
-    { selector: 'code', format: 'inlineSurround', options: { prefix: '`', suffix: '`' } },
-    { selector: 'del', format: 'inlineSurround', options: { prefix: '~~', suffix: '~~' } },
-    { selector: 'div', format: 'block' },
-    { selector: 'dl', format: 'definitionList' },
-    { selector: 'em', format: 'inlineSurround', options: { prefix: '*', suffix: '*' } },
-    { selector: 'figure', format: 'block' },
-    { selector: 'figcaption', format: 'block' },
-    { selector: 'footer', format: 'block' },
-    { selector: 'form', format: 'block' },
-    { selector: 'h1', format: 'heading', options: { level: 1 } },
-    { selector: 'h2', format: 'heading', options: { level: 2 } },
-    { selector: 'h3', format: 'heading', options: { level: 3 } },
-    { selector: 'h4', format: 'heading', options: { level: 4 } },
-    { selector: 'h5', format: 'heading', options: { level: 5 } },
-    { selector: 'h6', format: 'heading', options: { level: 6 } },
-    { selector: 'header', format: 'block' },
-    { selector: 'hr', format: 'blockString', options: { string: '----' } },
-    { selector: 'i', format: 'inlineSurround', options: { prefix: '*', suffix: '*' } },
-    { selector: 'img', format: 'image', options: { baseUrl: null } },
-    { selector: 'kbd', format: 'inlineTag' },
-    { selector: 'main', format: 'block' },
-    { selector: 'nav', format: 'block' },
-    { selector: 'ol', format: 'orderedList', options: { interRowLineBreaks: 1 } },
-    { selector: 'p', format: 'block' },
-    { selector: 'picture', format: 'inline' },
-    { selector: 'pre', format: 'pre' },
-    { selector: 's', format: 'inlineSurround', options: { prefix: '~~', suffix: '~~' } },
-    { selector: 'section', format: 'block' },
-    { selector: 'source', format: 'skip' },
-    { selector: 'strong', format: 'inlineSurround', options: { prefix: '**', suffix: '**' } },
-    { selector: 'sub', format: 'inlineTag' },
-    { selector: 'sup', format: 'inlineTag' },
-    { selector: 'table', format: 'dataTable' },
-    { selector: 'ul', format: 'unorderedList', options: { marker: '-', interRowLineBreaks: 1 } },
-    { selector: 'wbr', format: 'wbr' },
+    { selector: '*', format: 'inline', options: { ignoreHref: true, noAnchorUrl: true, linkBrackets: false, suffix: ' ', prefix: 'poop' } },
+    { selector: 'a', format: 'anchor', options: { ignoreHref: true, noAnchorUrl: true, linkBrackets: false, suffix: ' ' } },
+    { selector: 'article', format: 'block', options: { ignoreHref: true, noAnchorUrl: true, linkBrackets: false, suffix: ' ' } },
+    { selector: 'aside', format: 'block', options: { ignoreHref: true, noAnchorUrl: true, linkBrackets: false, suffix: ' ' } },
+    { selector: 'b', format: 'inlineSurround', options: { ignoreHref: true, prefix: '**', suffix: '**', linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'blockquote', format: 'blockquote', options: { trimEmptyLines: true, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'br', format: 'inlineString', options: { string: '<br>', ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'code', format: 'inlineSurround', options: { prefix: '`', suffix: '`', ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'del', format: 'inlineSurround', options: { prefix: '~~', suffix: '~~', ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'div', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true } },
+    { selector: 'div.aria-label', format: 'heading' },
+    { selector: 'dl', format: 'definitionList', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'em', format: 'inlineSurround', options: { prefix: '*', suffix: '*', ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'figure', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'figcaption', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'footer', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'form', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'h1', format: 'heading', options: { level: 1, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'h2', format: 'heading', options: { level: 2, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'h3', format: 'heading', options: { level: 3, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'h4', format: 'heading', options: { level: 4, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'h5', format: 'heading', options: { level: 5, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'h6', format: 'heading', options: { level: 6, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'header', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'hr', format: 'blockString', options: { string: '----' }, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' },
+    { selector: 'i', format: 'inlineSurround', options: { prefix: '*', suffix: '*', ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'img', format: 'skip', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'kbd', format: 'inlineTag', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'main', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'nav', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'ol', format: 'orderedList', options: { interRowLineBreaks: 1, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'p', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'picture', format: 'inline', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'pre', format: 'pre', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 's', format: 'inlineSurround', options: { prefix: '~~', suffix: '~~', ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'section', format: 'block', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'source', format: 'skip', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'strong', format: 'inlineSurround', options: { prefix: '**', suffix: '**', ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'sub', format: 'inlineTag', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'sup', format: 'inlineTag', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'table', format: 'dataTable', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'ul', format: 'unorderedList', options: { marker: '-', interRowLineBreaks: 1, ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
+    { selector: 'wbr', format: 'wbr', options: { ignoreHref: true, linkBrackets: false, noAnchorUrl: true, suffix: ' ' } },
   ],
   whitespaceCharacters: ' \t\r\n\f\u200b',
   wordwrap: 80
@@ -115,7 +102,7 @@ const selectorsMerge = (acc, src, options) => (
  * @returns { (html: string, metadata?: any) => string } Pre-configured converter function.
  * @static
  */
-function compile (options = {}) {
+function compile(options = {}) {
   options = merge(
     DEFAULT_OPTIONS,
     options,
@@ -126,7 +113,6 @@ function compile (options = {}) {
   );
   options.formatters = Object.assign({}, genericFormatters, markdownFormatters, options.formatters);
   options.selectors = mergeDuplicatesPreferLast(options.selectors, (s => s.selector));
-
   return compile_(options);
 }
 
@@ -144,7 +130,7 @@ function compile (options = {}) {
  * const text = convert('<h1>Hello World</h1>', {});
  * console.log(text); // # Hello World
  */
-function convert (html, options = {}, metadata = undefined) {
+function convert(html, options = {}, metadata = undefined) {
   return compile(options)(html, metadata);
 }
 

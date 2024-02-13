@@ -1,6 +1,9 @@
 import { readFileSync } from 'fs';
 
 import { htmlToMarkdown } from '../packages/html-to-md/src/html-to-md';
+import { writeFileSync } from 'fs';
+
+
 // const { htmlToMarkdown } = require('../packages/html-to-md/lib/html-to-md'); // build it first
 
 
@@ -14,13 +17,19 @@ console.log();
 
 console.log('From file:');
 const filePath = new URL('test.html', import.meta.url);
-/** @type { Options } */
-const options = {
-  selectors: [
-    { selector: 'table', format: 'block' },
-    { selector: 'table#invoice', format: 'dataTable' },
-    { selector: 'table.address', format: 'dataTable' },
-  ]
-};
-const text2 = htmlToMarkdown(readFileSync(filePath, 'utf8'), options);
-console.log(text2);
+const text2 = htmlToMarkdown(readFileSync(filePath, 'utf8'),);
+function removeEmptyLines(markdown) {
+  // Split the markdown text into an array of lines
+  const lines = markdown.split('\n');
+
+  // Filter out lines that only contain whitespace
+  const filteredLines = lines.filter(line => {
+    return line.trim() !== '';
+  });
+
+  // Join the filtered lines back into a single string
+  return filteredLines.join('\n');
+}
+
+const text3 = removeEmptyLines(text2);
+writeFileSync('output.md', text3);
